@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <title>MyBubble - Registro e inicio de sesion</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Encuentra las mejores recomendaciones de canciones"/>
+
+  <!--Estilos-->
+  <link rel="stylesheet" href="1-base.css"/>
+  <link rel="stylesheet" href="3-login.css"/>
+  <!--Toastify-->
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+  <!--Main-->
+  <script src="./script.js" type="module"></script>
+
+</head>
+
+<body class="inicio-registro">
+  <main class="container" id="container">
+    
+    <!-- Formulario inicio de sesión -->
+    <section class="container-form">
+      <form class="sign-in" id="login-form">
+        
+        <header>
+          <h2>Iniciar Sesión</h2>
+          <nav class="social-networks">
+            <button id="googleLogin" aria-label="Iniciar sesión con Gmail"> 
+              <ion-icon name="logo-google"></ion-icon>
+            </button>
+            <a href="#" aria-label="Iniciar sesión con Twitter">
+              <ion-icon name="logo-twitter"></ion-icon>
+            </a>
+            <a href="#" aria-label="Iniciar sesión con Instagram">
+              <ion-icon name="logo-instagram"></ion-icon>
+            </a>
+            <a href="#" aria-label="Iniciar sesión con TikTok">
+              <ion-icon name="logo-tiktok"></ion-icon>
+            </a>
+          </nav>
+          <p>Use su correo y contraseña</p>
+        </header>
+
+        <footer>
+          <label class="container-input">
+            <ion-icon name="mail-outline" aria-hidden="true"></ion-icon>
+            <input type="email" id ="login-email" placeholder="Email" required>
+          </label>
+
+          <label class="container-input">
+            <ion-icon name="lock-closed-outline" aria-hidden="true"></ion-icon>
+            <input type="password" id="login-password" placeholder="Contraseña" required>  
+          </label>
+
+          <a href="#">¿Olvidaste tu contraseña?</a>
+
+          <button class="button" type="submit">Iniciar Sesión</button>
+        </footer>
+        
+      </form>
+    </section>
+
+    <!-- Formulario registro -->
+    <section class="container-form">
+      <form class="sign-up" id = "signup-form" >
+        
+        <header>
+          <h2>Registrarse</h2>
+          <nav class="social-networks">
+            <a href="#" aria-label="Registrarse con Gmail"> 
+              <ion-icon name="logo-google"></ion-icon>
+            </a>
+            <a href="#" aria-label="Registrarse con Twitter">
+              <ion-icon name="logo-twitter"></ion-icon>
+            </a>
+            <a href="#" aria-label="Registrarse con Instagram">
+              <ion-icon name="logo-instagram"></ion-icon>
+            </a>
+            <a href="#" aria-label="Registrarse con TikTok">
+              <ion-icon name="logo-tiktok"></ion-icon>
+            </a>
+          </nav>
+          <p>Use su correo electrónico para registrarse</p>
+        </header>
+      
+        <footer> 
+          <label class="container-input">
+            <ion-icon name="person-outline" aria-hidden="true"></ion-icon>
+            <input type="text" id="signup-nombre" placeholder="Nombre" required>
+          </label>
+
+          <label class="container-input">
+            <ion-icon name="mail-outline" aria-hidden="true"></ion-icon>
+            <input type="email" id="signup-email" placeholder="Email" required>
+          </label>
+
+          <label class="container-input">
+            <ion-icon name="lock-closed-outline" aria-hidden="true"></ion-icon>
+            <input type="password" id="signup-password" placeholder="Contraseña" minlength="8">  
+          </label>
+
+          <button class="button" type="submit">Registrarse</button>
+        </footer>
+        
+      </form>
+    </section>
+
+    <!-- Panel lateral de bienvenida -->
+    <aside class="container-welcome">
+      <article class="welcome-sign-up welcome">
+        <h3>¡Bienvenido!</h3>
+        <p>Ingrese sus datos personales para usar todas las funciones del sitio</p>
+        <button class="button" id="btn-sign-up" type="button">
+          Registrarse
+        </button>
+      </article>
+
+      <article class="welcome-sign-in welcome">
+        <h3>¡Hola!</h3>
+        <p>Regístrese con sus datos personales para usar todas las funciones del sitio</p>
+        <button class="button" id="btn-sign-in" type="button">
+          Iniciar Sesión
+        </button>
+      </article>
+    </aside>
+    
+  </main>
+
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  <!--Tostify-->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+</body>
+
+</html>
