@@ -8,15 +8,13 @@ cancionRecomendar.addEventListener('submit', async (e) => {
   const token = await APIController.getToken();
   const genres = await APIController._getGenres(token);
   const songs = await APIController._getSongs(token , cancionIngresada);
-  console.log(songs);
+  console.log(songs.tracks.items);
   /*genres.forEach(genre => {
     console.log(genre.name);
   });*///ts shows the genres
- 
-  songs.forEach(song => {
+  songs.tracks.items.forEach(song => {
     console.log(song.name);
   });
- 
 })
 
 const APIController = (function() {  
@@ -58,7 +56,7 @@ const APIController = (function() {
       headers: {'Authorization': 'Bearer '+ token}
     });
     const trackResult = trackId.json()
-    return trackResult.tracks.items; 
+    return trackResult; 
   }
   return {
     getToken,
