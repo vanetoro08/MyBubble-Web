@@ -4,44 +4,45 @@ import { showMessage } from './showMessage.js'
 
 const signInForm = document.querySelector('#login-form');
 
+if(signInForm){
+  signInForm.addEventListener('submit',async (e) =>{
+    e.preventDefault();
 
-signInForm.addEventListener('submit',async (e) =>{
-  e.preventDefault();
+    const email = signInForm['login-email'].value;
+    const password = signInForm['login-password'].value;
+    
+    try {
+      const userCredentials = await signInWithEmailAndPassword(auth,email,password)
+      console.log(userCredentials)
 
-  const email = signInForm['login-email'].value;
-  const password = signInForm['login-password'].value;
-  
-  try {
-    const userCredentials = await signInWithEmailAndPassword(auth,email,password)
-    console.log(userCredentials)
+      showMessage("Bienvenido " + userCredentials.user.email)
 
-    showMessage("Bienvenido " + userCredentials.user.email)
+      setTimeout(() => {
+        window.location.href = 'home.html';
+      }, 1000);
 
-    setTimeout(() => {
-      window.location.href = 'home.html';
-    }, 1000);
-
-  } catch (error) {
-    if(error.code == "auth/invalid-credential"){
-      showMessage("Cotraseña o email incorrecto", "error")
-    }else{
-      showMessage(error.message,"error")
+    } catch (error) {
+      if(error.code == "auth/invalid-credential"){
+        showMessage("Cotraseña o email incorrecto", "error")
+      }else{
+        showMessage(error.message,"error")
+      }
     }
-  }
-})
+  })
 
 
-auth.onAuthStateChanged(user => {
-  if(user){
-    console.log("Usuario Activo");
-    var email = user.emailVerified;
+  auth.onAuthStateChanged(user => {
+    if(user){
+      console.log("Usuario Activo");
+      var email = user.emailVerified;
 
-    if(email){
-      window.location.href = "./home.html";
+      if(email){
+        window.location.href = "./home.html";
+      }else{
+        auth.signOut();
+      }
     }else{
-      auth.signOut();
+      console.log("Usuario inactivo");
     }
-  }else{
-    console.log("Usuario inactivo");
-  }
-})
+  })
+}

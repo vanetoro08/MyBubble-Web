@@ -25,11 +25,17 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-btnSignUp.addEventListener('click', () => {
-  container.classList.add('toggle');
-});
+if(btnSignUp){
+  
+  btnSignUp.addEventListener('click', () => {
+    container.classList.add('toggle');
+  });
+}
 
-btnSignIn.addEventListener('click', () => {
-  container.classList.remove('toggle');
-});
+if(btnSignIn){
+
+  btnSignIn.addEventListener('click', () => {
+    container.classList.remove('toggle');
+  });
+}
 
