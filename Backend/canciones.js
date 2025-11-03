@@ -158,7 +158,7 @@ const _getSongByArtist = async(token, songSelected) =>{
     console.log(artistGenre.length , artistGenre);
     if(artistGenre.length==1){
 
-        const resultado = await fetch('https://api.spotify.com/v1/search?q=genre%3A'+ artistGenre[0] +'+year%3A'+characteristics[0]+'&type=track&limit=2&offset='+ 0, { // se buscan 2 canciones del artista
+        const resultado = await fetch('https://api.spotify.com/v1/search?q=genre%3A'+ artistGenre[0] +'+year%3A'+characteristics[0]+'&type=track&limit=2', { // se buscan 2 canciones del artista
         method: 'GET' , 
         headers: {'Authorization': 'Bearer '+ token}
         });
@@ -170,7 +170,7 @@ const _getSongByArtist = async(token, songSelected) =>{
     }else if(artistGenre.length>1){
       genreAndYearResult= [];
       for(var i=0; i<artistGenre.length ; i++){
-        const resultado = await fetch('https://api.spotify.com/v1/search?q=genre%3A'+ artistGenre[i] +'+year%3A'+characteristics[0]+'&type=track&limit=1&offset='+0, { // se buscan 2 canciones del artista
+        const resultado = await fetch('https://api.spotify.com/v1/search?q=genre%3A'+ artistGenre[i] +'+year%3A'+characteristics[0]+'&type=track&limit=1', { // se buscan 2 canciones del artista
         method: 'GET' , 
         headers: {'Authorization': 'Bearer '+ token}
         });
@@ -188,7 +188,7 @@ const _getSongByArtist = async(token, songSelected) =>{
 
     var number=Math.floor(Math.random() );  
     const artistGenre = await _artistGenres(token, songSelected);
-    const resultado = await fetch('https://api.spotify.com/v1/search?q=genre%3A'+ artistGenre[0] +'&type=track&limit=3&offset='+ number, { // se buscan 2 canciones del artista
+    const resultado = await fetch('https://api.spotify.com/v1/search?q=genre%3A'+ artistGenre[0] +'&type=track&limit=5&offset='+ number, { // se buscan 2 canciones del artista
         method: 'GET' , 
         headers: {'Authorization': 'Bearer '+ token}
       });
