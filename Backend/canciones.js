@@ -6,16 +6,18 @@ cancionRecomendar.addEventListener('submit', async (e) => {
   console.log(cancionIngresada);
   
   const token = await APIController.getToken();
-  const songs = await APIController._searchSongs(token , cancionIngresada, 10,0); // resultados de la primera busqueda (Ejemplo: buscar Rule ado , salen x canciones de ese resultado y luego se elige con cual desea la recomendación)
-  const songSelected = songs.tracks.items[0]; // digamos que el usuario elgió la primera canción ( Deberia de servir para cualquiera del array :b ) 
-  console.log(await APIController._getSongByAlbum(token, songSelected));
+  var songs = await APIController._searchSongs(token , cancionIngresada, 10,0); // resultados de la primera busqueda (Ejemplo: buscar Rule ado , salen x canciones de ese resultado y luego se elige con cual desea la recomendación)
+  songs = songs.tracks.items; // ya acá está simplificado
+  const songSelected = songs[0]; // digamos que el usuario elgió la primera canción ( Deberia de servir para cualquiera del array :b ) 
+  APIController._getRecomendationsArray(token , songSelected);
+  /*console.log(await APIController._getSongByAlbum(token, songSelected));
   console.log("por artista");
   console.log(APIController._getSongByArtist(token , songSelected));
   console.log("por genero y año");
   APIController._getSongByGenreAndYear(token, songSelected);
   console.log("solo genero");
   console.log(APIController._getSongsByOnlyGenre(token , songSelected));
-  
+  */
 })
 
 const APIController = (function() {  
@@ -90,7 +92,7 @@ const _getSongByArtist = async(token, songSelected) =>{
     });
     const songs = await resultado.json()
     const songsEnded = await songs.tracks.items;
-    console.log(songsEnded);
+    return songsEnded; 
   }
 
 
@@ -138,11 +140,6 @@ const _getSongByArtist = async(token, songSelected) =>{
         number++
       }
     }
-      console.log("canciones album");
-      albumResult.forEach(song =>{
-        
-          //console.log(song.name);
-      });
       return albumResult; 
     }
   }
@@ -153,9 +150,9 @@ const _getSongByArtist = async(token, songSelected) =>{
     const characteristics = await _songCharacteristics(token, songSelected);
 
     var genreAndYearResult= null; 
-
+    //console.log(artistGenre);
     
-    console.log(artistGenre.length , artistGenre);
+    //console.log(artistGenre.length , artistGenre); // generos del artista 
     if(artistGenre.length==1){
 
         const resultado = await fetch('https://api.spotify.com/v1/search?q=genre%3A'+ artistGenre[0] +'+year%3A'+characteristics[0]+'&type=track&limit=2', { // se buscan 2 canciones del artista
@@ -164,7 +161,7 @@ const _getSongByArtist = async(token, songSelected) =>{
         });
 
         genreAndYearResult= await resultado.json(); 
-        console.log(genreAndYearResult);
+        
 
 
     }else if(artistGenre.length>1){
@@ -177,7 +174,7 @@ const _getSongByArtist = async(token, songSelected) =>{
         const resultadoCancion= await resultado.json();
         genreAndYearResult[i]= resultadoCancion.tracks.items[0]; 
       }
-      console.log(genreAndYearResult);
+      
 
     }
     return genreAndYearResult; 
@@ -195,12 +192,41 @@ const _getSongByArtist = async(token, songSelected) =>{
 
     const genreSongs = await resultado.json();
     const genreSongs2= genreSongs.tracks.items;
-    console.log(genreSongs2); 
     return genreSongs2; 
 
   }
+  const _getRecomendationsArray = async(token,songSelected)=>{
+    var arregloRecomendaciones = []
+    var i=0
+    const arregloAlbum= await APIController._getSongByAlbum(token, songSelected); 
+    const arregloGenero= await APIController._getSongsByOnlyGenre(token , songSelected);
+    const arregloGeneroYAnio = await APIController._getSongByGenreAndYear(token, songSelected); 
+    const arregloArtista = await APIController._getSongByArtist(token , songSelected); 
+    for( var j=0  ; j< arregloAlbum.length ; j++){
+      arregloRecomendaciones[i]= arregloAlbum[j];
+      i++;
+    }
+    for( var j=0  ; j< arregloGenero.length ; j++){
+      arregloRecomendaciones[i]= arregloGenero[j];
+      i++;
+    }
+    for( var j=0  ; j< arregloGeneroYAnio.length ; j++){
+      arregloRecomendaciones[i]= arregloGeneroYAnio[j];
+      i++;
+    }
+    for( var j=0  ; j< arregloArtista.length ; j++){
+      arregloRecomendaciones[i]= arregloArtista[j];
+      i++;
+    }
+    /*console.log("prueba");
+    
+    arregloRecomendaciones.forEach(cancion =>{
+      console.log(cancion); 
+    })*/
+   return arregloRecomendaciones; 
+  }
 
-  //acá está para conseguir la imagen y el nombre :b
+  //acá está para conseguir la imagen y el nombre :b es un ejemplo , asi lo puede hacer en otros lados ( supongo -_- )
   const _getNameAndImage = async(token,songSelected)=>{
     const imagen = songSelected.album.images[0];// imagen
     const nombre = songSelected.name;//nombre
@@ -217,7 +243,8 @@ const _getSongByArtist = async(token, songSelected) =>{
     _getSongByAlbum,
     _getSongByGenreAndYear,
     _getSongsByOnlyGenre,
-    _getNameAndImage
+    _getNameAndImage,
+    _getRecomendationsArray
   };
 
   
