@@ -6,6 +6,8 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="description" content="Encuentra las mejores recomendaciones de canciones"/>
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
 
   <!--Estilos-->
   <link rel="stylesheet" href="1-base.css"/>
@@ -46,12 +48,12 @@
         <footer>
           <label class="container-input">
             <ion-icon name="mail-outline" aria-hidden="true"></ion-icon>
-            <input type="email" id ="login-email" placeholder="Email" required>
+            <input type="email" id ="login-email" placeholder="Email" required autocomplete="off">
           </label>
 
           <label class="container-input">
             <ion-icon name="lock-closed-outline" aria-hidden="true"></ion-icon>
-            <input type="password" id="login-password" placeholder="Contraseña" required>  
+            <input type="password" id="login-password" placeholder="Contraseña" required autocomplete="off">  
           </label>
 
           <a href="#">¿Olvidaste tu contraseña?</a>
@@ -69,9 +71,9 @@
         <header>
           <h2>Registrarse</h2>
           <nav class="social-networks">
-            <a href="#" aria-label="Registrarse con Gmail"> 
+            <button id="googleSignup" aria-label="Registrarse con Gmail"> 
               <ion-icon name="logo-google"></ion-icon>
-            </a>
+            </button>
             <a href="#" aria-label="Registrarse con Twitter">
               <ion-icon name="logo-twitter"></ion-icon>
             </a>
@@ -88,17 +90,17 @@
         <footer> 
           <label class="container-input">
             <ion-icon name="person-outline" aria-hidden="true"></ion-icon>
-            <input type="text" id="signup-nombre" placeholder="Nombre" required>
+            <input type="text" id="signup-nombre" placeholder="Nombre" required autocomplete="off">
           </label>
 
           <label class="container-input">
             <ion-icon name="mail-outline" aria-hidden="true"></ion-icon>
-            <input type="email" id="signup-email" placeholder="Email" required>
+            <input type="email" id="signup-email" placeholder="Email" required autocomplete="off">
           </label>
 
           <label class="container-input">
             <ion-icon name="lock-closed-outline" aria-hidden="true"></ion-icon>
-            <input type="password" id="signup-password" placeholder="Contraseña" minlength="8">  
+            <input type="password" id="signup-password" placeholder="Contraseña" minlength="8" autocomplete="off">  
           </label>
 
           <button class="button" type="submit">Registrarse</button>
@@ -135,3 +137,4 @@
 </body>
 
 </html>
+

@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MyBubble - Recomendaciones</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#42b6f0",
+              "background-light": "#f6f7f8",
+              "background-dark": "#101c22",
+            },
+            fontFamily: {
+              display: ["Spline Sans", "sans-serif"],
+            },
+            borderRadius: { DEFAULT: "1rem", lg: "2rem", xl: "3rem", full: "9999px" },
+          },
+        },
+      };
+    </script>
+<style type="text/tailwindcss">
+      @layer utilities {
+        .gradient-border-mask {
+          mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          mask-composite: exclude;
+        }
+      }
+    </style>
+<style>
+      .bubble {
+        position: absolute;
+        border-radius: 50%;
+        background: linear-gradient(135deg, rgba(66, 182, 240, 0.2), rgba(66, 182, 240, 0));
+        animation: float 20s infinite;
+      }
+      .bubble:nth-child(1) {
+        width: 150px;
+        height: 150px;
+        top: 10%;
+        left: 5%;
+        animation-duration: 25s;
+      }
+      .bubble:nth-child(2) {
+        width: 200px;
+        height: 200px;
+        top: 20%;
+        right: 10%;
+        animation-duration: 30s;
+        animation-delay: 2s;
+      }
+      .bubble:nth-child(3) {
+        width: 100px;
+        height: 100px;
+        bottom: 15%;
+        left: 15%;
+        animation-duration: 18s;
+      }
+      .bubble:nth-child(4) {
+        width: 250px;
+        height: 250px;
+        bottom: 5%;
+        right: 5%;
+        animation-duration: 22s;
+        animation-delay: 5s;
+      }
+      @keyframes float {
+        0% {
+          transform: translateY(0) translateX(0);
+        }
+        50% {
+          transform: translateY(-20px) translateX(10px);
+        }
+        100% {
+          transform: translateY(0) translateX(0);
+        }
+      }.recommendation-bubble {
+        position: relative;
+        z-index: 0;
+        margin-bottom: 0.75rem;
+        border-radius: 1.5rem;
+        background-color: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(8px);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+        padding: 0.75rem 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+      .dark .recommendation-bubble {
+        background-color: rgba(30, 41, 59, 0.6);
+      }
+      .recommendation-bubble:hover {
+        background-color: rgba(66, 182, 240, 0.15);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        transform: translateY(-2px);
+      }
+      .dark .recommendation-bubble:hover {
+        background-color: rgba(66, 182, 240, 0.25);
+      }
+      .recommendation-bubble.selected {
+        background: linear-gradient(
+              to right,
+              theme("colors.primary.DEFAULT"),
+              theme("colors.primary.DEFAULT")
+            )
+            border-box;
+        border: 2px solid transparent;
+        border-radius: 1.5rem;
+        background-origin: border-box;
+        background-clip: padding-box, border-box;
+        box-shadow: 0 4px 15px rgba(66, 182, 240, 0.4);
+      }.recommendation-bubble.selected > .recommendation-content {
+        background-color: theme('colors.background-light');
+        border-radius: 1.25rem;
+        padding: 0.5rem 1rem;
+      }
+      .dark .recommendation-bubble.selected > .recommendation-content {
+        background-color: theme('colors.background-dark');
+      }
+      .recommendation-bubble.selected::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        padding: 2px;
+        background: linear-gradient(135deg, theme('colors.primary'), theme('colors.primary') 70%, rgba(66, 182, 240, 0.6));
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        z-index: -1;
+      }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#111618] dark:text-background-light">
+<div class="relative min-h-screen w-full overflow-hidden">
+<div class="bubble"></div>
+<div class="bubble"></div>
+<div class="bubble"></div>
+<div class="bubble"></div>
+<div class="relative z-10 flex h-full min-h-screen flex-col">
+<header class="border-b border-primary/20 backdrop-blur-sm">
+<div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3 text-primary">
+<svg class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-12h2v4h-2zm0 6h2v2h-2z"></path>
+</svg>
+<h1 class="text-2xl font-bold">MyBubble</h1>
+</div>
+<nav class="hidden items-center gap-6 md:flex">
+<a class="text-sm font-medium text-[#111618]/80 dark:text-background-light/80 hover:text-primary" href="#">Inicio</a>
+<a class="text-sm font-medium text-primary" href="#">Explorar</a>
+<a class="text-sm font-medium text-[#111618]/80 dark:text-background-light/80 hover:text-primary" href="#">Tu Biblioteca</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden sm:block">
+<label class="relative">
+<span class="sr-only">Search</span>
+<span class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-[#111618]/50 dark:text-background-light/50">
+<svg fill="currentColor" height="20" viewBox="0 0 256 256" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"></path>
+</svg>
+</span>
+<input class="w-full rounded-full border-none bg-background-light/70 dark:bg-background-dark/70 py-2 pl-10 pr-4 text-sm text-[#111618] dark:text-background-light placeholder:text-[#111618]/50 dark:placeholder:text-background-light/50 focus:ring-2 focus:ring-primary" placeholder="Search songs, artists"/>
+</label>
+</div>
+<button class="rounded-full p-2 hover:bg-primary/10">
+<svg fill="currentColor" height="20" viewBox="0 0 256 256" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M221.8,175.94C216.25,166.38,208,139.33,208,104a80,80,0,1,0-160,0c0,35.34-8.26,62.38-13.81,71.94A16,16,0,0,0,48,200H88.81a40,40,0,0,0,78.38,0H208a16,16,0,0,0,13.8-24.06ZM128,216a24,24,0,0,1-22.62-16h45.24A24,24,0,0,1,128,216ZM48,184c7.7-13.24,16-43.92,16-80a64,64,0,1,1,128,0c0,36.05,8.28,66.73,16,80Z"></path>
+</svg>
+</button>
+<div class="h-10 w-10 rounded-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD-FYB7KvZDEoRL4xuvRaobA8oXjls3ZIcQWEeWCe8Dgs3zeDNbew2-n7tbRtPtdeLkYkBLYxxg2vMeztWcyNEVD1Arj7RS6fbWi0w4EJ0s3WkWo-qSwo6cwwq3vEQIoF-mlpVKJ5Oai_6oI3PtaAAfEx7fN_PKY8m4J08_k9V7o426aBtTR2SW8dkscu94w8cSXYqhVPLwZerSgCxiLhsKiw1iIzqM3HTOHkQdrQSB8LBk1QYuCR2Ixfk2E8gjmUPUxFtaXv-ocfA");'></div>
+</div>
+</div>
+</header>
+<main class="flex-1 px-6 py-8 flex flex-col items-center">
+<div class="mx-auto max-w-4xl text-center">
+<h2 class="text-4xl font-bold tracking-tight text-[#111618] dark:text-background-light">Recomendaciones para ti</h2>
+<p class="mt-2 text-lg text-[#111618]/70 dark:text-background-light/70">Explora la selección detallada de canciones.</p>
+<div class="mt-8 w-full">
+<div class="relative">
+<div class="flex flex-col gap-4">
+<div class="recommendation-bubble">
+<div class="recommendation-content flex items-center gap-4 flex-grow min-w-0">
+<div class="h-20 w-20 flex-shrink-0 rounded-lg bg-cover bg-center shadow-md" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDk9y7UyLRXaZ6RdsRPN4Pk1wtrNu1Moo-2b1kiqhz50aG-2iZksfmd60VsF5WVYVmMNqHGhJzmVAMVYuyOrN6IkNs6qKwOlWAziFCGw0myXzzVTXWiowMppqE8MwaF6qiuRtt9KjNS0L_QBfj1k4YIAxuBNEjIbQAyUygNokIIR14_EypOOXxPhVG60brk05egNPZ24m03HVsGWaYqOSRq0azWV7xgHY38c39D4pFpmRSjsN_jM6HoF_yAnMeabh1gpbseY1pjvJY");'></div>
+<div class="flex flex-col text-sm items-center flex-grow">
+<span class="font-medium text-[#111618]/80 dark:text-background-light/80 text-lg">Ho Hey</span>
+<span class="text-[#111618]/70 dark:text-background-light/70">The Lumineers</span>
+</div>
+<div class="hidden md:flex items-center gap-6 ml-auto pr-2 min-w-0">
+<div class="flex flex-col text-sm items-center">
+<span class="font-medium text-[#111618]/80 dark:text-background-light/80">Género</span>
+<span class="text-[#111618]/70 dark:text-background-light/70 truncate max-w-[100px]">Indie Folk</span>
+</div>
+<div class="flex flex-col text-sm items-center">
+<span class="font-medium text-[#111618]/80 dark:text-background-light/80">Duración</span>
+<span class="text-[#111618]/70 dark:text-background-light/70">2:43</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-3 flex-shrink-0">
+<button class="rounded-full bg-primary/10 p-2 text-[#111618] transition hover:bg-primary/20 dark:text-background-light dark:hover:bg-primary/30 group">
+<span class="material-symbols-outlined text-base group-hover:scale-110 transition-transform">play_arrow</span>
+<span class="sr-only">Reproducir</span>
+</button>
+<button class="rounded-full bg-primary/10 p-2 text-[#111618] transition hover:bg-primary/20 dark:text-background-light dark:hover:bg-primary/30 group">
+<span class="material-symbols-outlined text-base group-hover:scale-110 transition-transform">add</span>
+<span class="sr-only">Añadir</span>
+</button>
+</div>
+</div>
+<div class="recommendation-bubble selected">
+<div class="recommendation-content flex items-center gap-4 flex-grow min-w-0">
+<div class="h-20 w-20 flex-shrink-0 rounded-lg bg-cover bg-center shadow-md" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD24vO8OXjAl9lFiUXm4aAHY5uwj_h6qdl-pY6XnEx8ldrLa9LhxiHJepo-hogHakN6DoezIr0tQkFkV7AbGyQvxPOYIFoJuYmAJZNfL_boS64t-NW50p_nsHPYmc8gY4CTySgV3coK-56SrNDxiK2z6ciJ5-yFw7ebJa765QYofRGGhlC_SNo0zptZMxVmIKYTCQ12-daQiYcqHV3zQV53lgEU4zizQdz9FzI9RY0PkGuOQV9UuQoaKtLOFeC3E8qVzjEpWLgSEdQ");'></div>
+<div class="flex flex-col text-sm items-center flex-grow">
+<span class="font-medium text-[#111618]/80 dark:text-background-light/80 text-lg">Little Talks</span>
+<span class="text-[#111618]/70 dark:text-background-light/70">Of Monsters and Men</span>
+</div>
+<div class="hidden md:flex items-center gap-6 ml-auto pr-2 min-w-0">
+<div class="flex flex-col text-sm items-center">
+<span class="font-medium text-[#111618]/80 dark:text-background-light/80">Género</span>
+<span class="text-[#111618]/70 dark:text-background-light/70 truncate max-w-[100px]">Indie Pop</span>
+</div>
+<div class="flex flex-col text-sm items-center">
+<span class="font-medium text-[#111618]/80 dark:text-background-light/80">Duración</span>
+<span class="text-[#111618]/70 dark:text-background-light/70">4:26</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-3 flex-shrink-0">
+<button class="rounded-full bg-primary/10 p-2 text-[#111618] transition hover:bg-primary/20 dark:text-background-light dark:hover:bg-primary/30 group">
+<span class="material-symbols-outlined text-base group-hover:scale-110 transition-transform">play_arrow</span>
+<span class="sr-only">Reproducir</span>
+</button>
+<button class="rounded-full bg-primary/10 p-2 text-[#111618] transition hover:bg-primary/20 dark:text-background-light dark:hover:bg-primary/30 group">
+<span class="material-symbols-outlined text-base group-hover:scale-110 transition-transform">add</span>
+<span class="sr-only">Añadir</span>
+</button>
+</div>
+</div>
+<div class="recommendation-bubble">
+<div class="recommendation-content flex items-center gap-4 flex-grow min-w-0">
+<div class="h-20 w-20 flex-shrink-0 rounded-lg bg-cover bg-center shadow-md" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC3wK8dLx1dd8_KPaMecPPwkHuLZ38BZUVbVgHqEcwEHgwCTMfxxnbPDcKXhJkwCw4luVenCvi12d81rgs7qvTzdijmqwSjRTn1ykUt_wcXmJClC7bcpbz94nuqUEn3q1MkqzDPSU60WWT5cdbKyjn1qwD8y07XcJM9w2kPL54_OUhiCCzO5VK0CqKML-oU-AroBL0wG4WUGIrVoMSA7n7KwhN_SBcTUqisEsJ6KPQeC-c_9u-Es3OJj7XF3XOw4gNyEMWTA3y_xWo");'></div>
+<div class="flex flex-col text-sm items-center flex-grow">
+<span class="font-medium text-[#111618]/80 dark:text-background-light/80 text-lg">Viva la Vida</span>
+<span class="text-[#111618]/70 dark:text-background-light/70">Coldplay</span>
+</div>
+<div class="hidden md:flex items-center gap-6 ml-auto pr-2 min-w-0">
+<div class="flex flex-col text-sm items-center">
+<span class="font-medium text-[#111618]/80 dark:text-background-light/80">Género</span>
+<span class="text-[#111618]/70 dark:text-background-light/70 truncate max-w-[100px]">Alternative Rock</span>
+</div>
+<div class="flex flex-col text-sm items-center">
+<span class="font-medium text-[#111618]/80 dark:text-background-light/80">Duración</span>
+<span class="text-[#111618]/70 dark:text-background-light/70">4:04</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-3 flex-shrink-0">
+<button class="rounded-full bg-primary/10 p-2 text-[#111618] transition hover:bg-primary/20 dark:text-background-light dark:hover:bg-primary/30 group">
+<span class="material-symbols-outlined text-base group-hover:scale-110 transition-transform">play_arrow</span>
+<span class="sr-only">Reproducir</span>
+</button>
+<button class="rounded-full bg-primary/10 p-2 text-[#111618] transition hover:bg-primary/20 dark:text-background-light dark:hover:bg-primary/30 group">
+<span class="material-symbols-outlined text-base group-hover:scale-110 transition-transform">add</span>
+<span class="sr-only">Añadir</span>
+</button>
+</div>
+</div>
+<div class="recommendation-bubble">
+<div class="recommendation-content flex items-center gap-4 flex-grow min-w-0">
+<div class="h-20 w-20 flex-shrink-0 rounded-lg bg-cover bg-center shadow-md" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB-8fSomGS8IWl4CRU7ugKOgBwIG6kNichq_jI6VOa1LOdV0W3S65cng590tDh1Jx9ceqg25gJa8vYx4k2G6fqOitxgjrDi5TkpcIby0fFO6nrIg-JXkylku--IA-D_TOrMBDoaDBq7LzqVWblxLJJwbTKfjulSIlbv-4gzoTRLzPk76IRsZtjrMfpIxJBpWyKQ5FZhJWkmNBSRhuAi-mn47ZAN61zG9dShtZTrlYqoDcyCghnmp3bAQzIt4qeIa3FqOr6LJElXy3U");'></div>
+<div class="flex flex-col text-sm items-center flex-grow">
+<span class="font-medium text-[#111618]/80 dark:text-background-light/80 text-lg">Radioactive</span>
+<span class="text-[#111618]/70 dark:text-background-light/70">Imagine Dragons</span>
+</div>
+<div class="hidden md:flex items-center gap-6 ml-auto pr-2 min-w-0">
+<div class="flex flex-col text-sm items-center">
+<span class="font-medium text-[#111618]/80 dark:text-background-light/80">Género</span>
+<span class="text-[#111618]/70 dark:text-background-light/70 truncate max-w-[100px]">Alternative Rock</span>
+</div>
+<div class="flex flex-col text-sm items-center">
+<span class="font-medium text-[#111618]/80 dark:text-background-light/80">Duración</span>
+<span class="text-[#111618]/70 dark:text-background-light/70">3:07</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-3 flex-shrink-0">
+<button class="rounded-full bg-primary/10 p-2 text-[#111618] transition hover:bg-primary/20 dark:text-background-light dark:hover:bg-primary/30 group">
+<span class="material-symbols-outlined text-base group-hover:scale-110 transition-transform">play_arrow</span>
+<span class="sr-only">Reproducir</span>
+</button>
+<button class="rounded-full bg-primary/10 p-2 text-[#111618] transition hover:bg-primary/20 dark:text-background-light dark:hover:bg-primary/30 group">
+<span class="material-symbols-outlined text-base group-hover:scale-110 transition-transform">add</span>
+<span class="sr-only">Añadir</span>
+</button>
+</div>
+</div>
+<div class="recommendation-bubble">
+<div class="recommendation-content flex items-center gap-4 flex-grow min-w-0">
+<div class="h-20 w-20 flex-shrink-0 rounded-lg bg-cover bg-center shadow-md" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD-FYB7KvZDEoRL4xuvRaobA8oXjls3ZIcQWEeWCe8Dgs3zeDNbew2-n7tbRtPtdeLkYkBLYxxg2vMeztWcyNEVD1Arj7RS6fbWi0w4EJ0s3WkWo-qSwo6cwwq3vEQIoF-mlpVKJ5Oai_6oI3PtaAAfEx7fN_PKY8m4J08_k9V7o426aBtTR2SW8dkscu94w8cSXYqhVPLwZerSgCxiLhsKiw1iIzqM3HTOHkQdrQSB8LBk1QYuCR2Ixfk2E8gjmUPUxFtaXv-ocfA");'></div>
+<div class="flex flex-col text-sm items-center flex-grow">
+<span class="font-medium text-[#111618]/80 dark:text-background-light/80 text-lg">Blinding Lights</span>
+<span class="text-[#111618]/70 dark:text-background-light/70">The Weeknd</span>
+</div>
+<div class="hidden md:flex items-center gap-6 ml-auto pr-2 min-w-0">
+<div class="flex flex-col text-sm items-center">
+<span class="font-medium text-[#111618]/80 dark:text-background-light/80">Género</span>
+<span class="text-[#111618]/70 dark:text-background-light/70 truncate max-w-[100px]">Synth-pop</span>
+</div>
+<div class="flex flex-col text-sm items-center">
+<span class="font-medium text-[#111618]/80 dark:text-background-light/80">Duración</span>
+<span class="text-[#111618]/70 dark:text-background-light/70">3:20</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-3 flex-shrink-0">
+<button class="rounded-full bg-primary/10 p-2 text-[#111618] transition hover:bg-primary/20 dark:text-background-light dark:hover:bg-primary/30 group">
+<span class="material-symbols-outlined text-base group-hover:scale-110 transition-transform">play_arrow</span>
+<span class="sr-only">Reproducir</span>
+</button>
+<button class="rounded-full bg-primary/10 p-2 text-[#111618] transition hover:bg-primary/20 dark:text-background-light dark:hover:bg-primary/30 group">
+<span class="material-symbols-outlined text-base group-hover:scale-110 transition-transform">add</span>
+<span class="sr-only">Añadir</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div></main>
+</div>
+</div>
+</body></html>

@@ -4,6 +4,11 @@ ACA ESTA LA SECCION PARA BUSCAR LAS CANCIONES
 EL HMTL ES "HOME.HTML"*/
 /*-------------------------------------*/
 
+main{
+  background: #7ac1ff;
+  background: linear-gradient(0deg, rgba(122, 193, 255, 1) 0%, rgba(153, 236, 255, 1) 44%, rgba(228, 247, 247, 1) 75%, rgba(255, 255, 255, 1) 93%);
+}
+
 /*Botones del header*/
 header div:nth-child(2){
   display: flex;
@@ -38,19 +43,22 @@ header div:nth-child(2){
 
 }
 
-main > section:first-child{
+main > section:first-child > div:first-child{
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  height: 450px;
+  height: 330px;
+  position: sticky;
+  top: 0; 
+  z-index: 5;
+}
 
-  h1{
-    font-size: 4rem;
-    color: black;
-    max-width: 40rem;
-  }
+main > section:first-child > div:first-child h1 {
+  font-size: 4rem;
+  color: black;
+  max-width: 40rem;
 }
 
 button[type="submit"]{
@@ -60,7 +68,7 @@ button[type="submit"]{
   }
 }
 
-main > section:nth-child(2){
+main > section:nth-child(3){
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -92,7 +100,6 @@ main > section:nth-child(2){
   
   &:hover{
     transform: translateY(-4px);
-
   }
 
   img{
@@ -122,6 +129,7 @@ main > section:nth-child(2){
   width: 100%;
   margin: auto;
   margin-top: 70px;
+  z-index: 50;
 }
 
 .menu ul{

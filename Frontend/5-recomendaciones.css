@@ -1,0 +1,230 @@
+ol{
+/* Mantiene el posicionamiento que evita que empuje otros elementos */
+  position: absolute;
+  top: 425px; /* AJUSTA este valor a la altura de tu div fijo */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30rem; 
+  z-index: 10;
+  border-radius: 0.5rem; 
+  
+  /* PROPIEDADES CLAVE PARA EL SCROLL INTERNO */
+  max-height: 400px; /* Altura máxima que ocupará la lista antes de hacer scroll */
+  overflow-y: auto; 
+
+  scrollbar-color: #2161cc #b4dbff;
+  scrollbar-width: thin;
+  scrollbar-gutter: stable;
+
+  background-color: #1848ac;
+}
+
+
+.suggestion-item{
+  background-color: #e6e8e9; 
+  cursor: pointer;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  margin: 0.25rem 0.35rem;
+  
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+
+  img{
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 0.25rem;
+  }
+
+  div{
+    flex: 1 1 auto;
+    h2{
+      font-weight: 500;
+      font-size: 16px;
+      color: black;
+    }
+    p{
+      font-size: 1rem;
+    }
+  }
+
+  &:hover{
+    background-color: rgb(191, 240, 255);
+  }
+}
+
+/* Contenedor principal de recomendaciones */
+.recomendacionesCanciones {
+  text-align: center;
+  width: 100%;
+  max-width: 800px; /* Limita el ancho máximo */
+  margin-top: 0;
+  margin: 0 auto; /* Centra el contenedor */
+  padding: 1rem;
+}
+
+/* ============================================
+   CADA CANCIÓN (CONTENEDOR AZUL)
+   ============================================ */
+.info-songs {
+  display: grid;
+  grid-template-columns: 64px 1fr 1fr 1fr 0.25fr;
+  gap: 1rem;
+  align-items: center;
+  justify-items: center; /* ✅ Centra cada celda */
+  
+  background-color: #e6e6eb;
+  padding: 0.75rem;
+  border-radius: 0.75rem;
+  margin-bottom: 0.75rem;
+  width: 100%;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 20px 25px -5px  rgb(151, 151, 151);
+
+}
+
+.info-songs:hover {
+  background-color: #deefff;
+  transform: translateY(-4px);
+
+}
+
+/* ============================================
+   IMAGEN DE LA CANCIÓN
+   ============================================ */
+.info-songs img {
+  width: 64px;
+  height: 64px;
+  border-radius: 0.25rem;
+  object-fit: cover;
+  justify-self: start; /* ✅ La imagen va a la izquierda */
+}
+
+/* ============================================
+   SECCIONES DE INFORMACIÓN (CONTENEDORES ROSA)
+   ============================================ */
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+  align-items: center;
+  text-align: center;
+  padding: 0.25rem;
+  
+  width: 100%; /* ✅ CLAVE: Ocupa todo el ancho */
+  max-width: 100%;
+
+}
+
+/* ============================================
+   TÍTULOS (AMARILLO)
+   ============================================ */
+.info h1 {
+  font-size: 16px;
+  font-weight: 600;
+  color: black;
+  text-align: center;
+  margin: 0;
+  width: 100%;
+
+  display: block;
+  line-height: 1.2;
+  letter-spacing: normal;
+  gap: 0;
+}
+
+/* ============================================
+   CONTENIDO (VERDE)
+   ============================================ */
+.info p {
+  font-size: 14px;
+  color: black;
+  margin: 0;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.titulos{
+  h1{
+    display: block;
+    line-height: 1.2;
+    letter-spacing: normal;
+    font-size: 3rem ;
+    color: black;
+  }
+  p{
+    margin-top: 0;
+  }
+}
+
+.boton{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  gap: 1rem;
+}
+
+.btnAñadir{
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+
+  font-size: 20px; 
+  background-color: var(--primary-dark);
+  color: white; 
+  border: none;
+  cursor: pointer;
+
+  &:hover{
+    background-color: var(--primary-hover);
+  }
+}
+
+.btnGuardar{
+  
+  color: var(--primary-dark);
+  font-size: 36px;
+  margin-top: 8px;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  outline: none;
+  background: transparent;
+}
+
+.btnGuardar.guardada ion-icon {
+  color: #ff5f5f; 
+}
+
+.btnGuardar:hover ion-icon {
+  transform: scale(1.2);
+}
+
+.btnGuardar.guardada ion-icon {
+  animation: heartBeat 0.4s ease;
+}
+
+.p-recomend{
+  font-size: 20px;
+  font-weight: 600;
+  color: rgb(31, 31, 31);
+}
+
+.loaded {
+  color:rgb(230, 230, 230); 
+  padding: 0.5rem; 
+  text-align: center;
+}

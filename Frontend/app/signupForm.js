@@ -2,6 +2,7 @@
 import { createUserWithEmailAndPassword,sendEmailVerification } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js"
 import { auth } from './firebase.js'
 import { showMessage } from './showMessage.js'
+import { crearPerfilUsuario } from './database.js';
 
 const signupForm = document.querySelector('#signup-form');
 
@@ -18,11 +19,16 @@ if(signupForm){
       const userCredentials = await createUserWithEmailAndPassword(auth,email,password)
       console.log(userCredentials)
 
-      sendEmailVerification(auth.currentUser).then(() => {
-        showMessage("Se ha enviado un correo de verificacion");
-      });
+      //Crear perfil en firestore
+      await crearPerfilUsuario(userCredentials.user.uid,email,nombre);
+      console.log('Perfil creado en firestore');
 
+      //Envio de correo de verificacion
+      await sendEmailVerification(auth.currentUser);
+      showMessage("Se ha enviado un correo de verificacion");
+      
       showMessage("Bienvenido " + nombre)
+      signupForm.reset();
 
     } catch (error) {
 

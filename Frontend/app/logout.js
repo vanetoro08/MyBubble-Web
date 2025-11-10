@@ -8,6 +8,7 @@ const logout = document.querySelector('#logout')
 if(logout){
   
   logout.addEventListener('click',async () =>{
+    
     try {
     
       await signOut(auth)
@@ -23,4 +24,11 @@ if(logout){
     }
   })
 
+  document.addEventListener('click', (e) => {
+    if (menu && !menu.contains(e.target) && !logout.contains(e.target)) {
+      menu.classList.remove('menu-active')
+    }
+  })
+
 }
+

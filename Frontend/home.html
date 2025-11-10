@@ -6,14 +6,19 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="description" content="Encuentra las mejores recomendaciones de canciones"/>
+  <link rel="icon" type="image/png" href="images/favicon.png">
 
-  <link rel="stylesheet" href="1-base.css"/>
-  <link rel="stylesheet" href="4-home.css"/>
+
+  <link rel="stylesheet" href="./1-base.css"/>
+  <link rel="stylesheet" href="./4-home.css"/>
+  <link rel="stylesheet" href="./5-recomendaciones.css" />
+
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
   
-  <script src="./script.js" type="module"></script>
-  <script src="/Backend/api.js" type="module"></script>
-  
+  <script type="module" src="./script.js" defer></script>
+  <script type="module" src="./app/canciones.js"></script>
+  <script type="module" src="./app/spotifyApi.js"></script>
+
 </head>
 
 <body>
@@ -67,19 +72,26 @@
 
   <main>
     <section>
-      <h1>Encuentra tu próxima cancíon favorita</h1>
-      <p>Obtén recomendaciones personalizadas y descubre nueva música que sintonice contigo.</p>
-      <form role="search" id ="search-song">
-        <div>
-          <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="1"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-search"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" /><path d="M21 21l-6 -6" /></svg>
+      
+      <div>
+        <h1>Encuentra tu próxima cancíon favorita</h1>
+        <p>Obtén recomendaciones personalizadas y descubre nueva música que sintonice contigo.</p>
+        <form role="search" id ="search-song">
+          <div>
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="1"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-search"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" /><path d="M21 21l-6 -6" /></svg>
 
-          <input required type="text" id= "buscar-cancion" placeholder="Introduce una canción o artista">
-          <button type="submit">Recomendar</button>
-        </div>
-      </form>
+            <input required type="text" id= "buscar-cancion" placeholder="Introduce una canción o artista" autocomplete="off">
+            
+            <button type="submit">Recomendar</button>
+          </div>
+        </form>
+      </div>
+      <ol id="cancionesBusqueda"></ol>
     </section>
+    
+    <div class= "recomendacionesCanciones" id="recomendaciones"></div>
 
-    <section>
+    <section id="ambientes">
     
       <h1>O explora por ambiente</h1>
       <footer>
@@ -136,10 +148,11 @@
     const menu = document.querySelector('.menu');
 
     userIcon.addEventListener('click', (e) => {
-      e.stopPropagation(); // Evita que se propague el click
+      e.stopPropagation(); 
       menu.classList.toggle('menu-active');
       console.log("Menú toggled");
     });
   </script>
 </body>
 </html>
+
